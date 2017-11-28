@@ -1,0 +1,96 @@
+<div>
+
+  <div>
+    <span class="buscarLibros">Buscar:</span>
+    <input ng-model="ContactoController.contactoBuscado">
+
+  </div>
+
+
+  <table class="table table-striped table-hover table-condensed example-animate-container">
+
+    <tr>
+      <th>Contacto</th>
+      <th>Favorito</th>
+    </tr>
+
+    <tr ng-repeat="contacto in ContactoController.contactos  | filter: ContactoController.contactoBuscado">
+      <td>{{contacto.nombre}}</td>
+      <td>{{contacto.fav? "SI": "NO"}}</td>
+      <td>
+        <button class="btn btn-success" ng-click="contacto.cambiarDeEstado()">
+          Fav
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#editarModal" ng-click="ContactoController.seleccionarContacto(contacto)">
+          Editar contacto
+        </button>
+      </td>
+    </tr>
+  </table>
+
+
+
+
+  <div id="editarModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Editar contacto</h3>
+        </div>
+
+        <div class="modal-body">
+
+          <form>
+            <div class="input-group">
+              Nombre:
+              <br>
+              <input ng-model="ContactoController.nuevoNombre" type="text" class="form-control" placeholder= {{ContactoController.contactoSeleccionado.nombre}}> </div>
+            Mail:
+            <input ng-model="ContactoController.nuevoMail" type="text" class="form-control" placeholder= {{ContactoController.contactoSeleccionado.mail}}> Tel:
+            <input ng-model="ContactoController.nuevoTelefono" type="text" class="form-control" placeholder= {{ContactoController.contactoSeleccionado.telefono}}>
+        </div>
+
+        </form>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button class="btn btn-success" ng-click="ContactoController.editarContacto()">
+            Editar
+          </button>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<form>
+  <div class="input-group">
+    <p style="color:blue;" style="font-size:36px;">Nuevo Contacto</p>
+    <input ng-model="ContactoController.nuevoNombre" type="text" class="form-control" placeholder="Nombre y apellido">
+    <input ng-model="ContactoController.nuevoTelefono" type="text" class="form-control" placeholder="Telefono">
+    <input ng-model="ContactoController.nuevoMail" type="text" class="form-control" placeholder="Mail">
+    <div class="input-group-btn">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" ng-click="ContactoController.agregarContacto()">
+    Agregar contacto
+  </button>
+</form>
+
+
+
+
+
+
+
+</div>
